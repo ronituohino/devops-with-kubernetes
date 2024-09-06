@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output-split
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output-split
+  template:
+    metadata:
+      labels:
+        app: log-output-split
+    spec:
+      volumes: # Define volume
+        - name: shared-date
+          emptyDir: {}
+      containers:
+        - name: log-generator
+          image: ronituohino/log-generator:1.10
+          volumeMounts: # Mount volume
+          - name: shared-date
+            mountPath: /usr/src/app/files
+        - name: log-output
+          image: ronituohino/log-output:1.10
+          volumeMounts: # Mount volume
+          - name: shared-date
+            mountPath: /usr/src/app/files
