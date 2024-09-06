@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      volumes:
+        - name: shared-ping-pong
+          persistentVolumeClaim:
+            claimName: ping-pong-claim
+      containers:
+        - name: log-output
+          image: ronituohino/log-output:1.11
+          volumeMounts:
+          - name: shared-ping-pong
+            mountPath: /usr/src/app/files
