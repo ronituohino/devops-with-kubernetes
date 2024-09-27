@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: ronituohino/log-output:2.01.3
+          image: ronituohino/log-output:2.01.5

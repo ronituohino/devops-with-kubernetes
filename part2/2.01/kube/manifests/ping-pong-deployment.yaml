@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: ronituohino/ping-pong:2.01.0
+          image: ronituohino/ping-pong:2.01.2

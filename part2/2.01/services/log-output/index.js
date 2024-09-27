@@ -8,9 +8,9 @@ const id = crypto.randomUUID();
 
 async function getPings() {
   try {
-    const result = await fetch("http://ping-pong-svc:2346");
+    const result = await fetch("http://ping-pong-svc:2346/pingpong/count");
     const str = await result.text();
-    return str.split(" ")[1];
+    return str;
   } catch (err) {
     return "0";
   }
