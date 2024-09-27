@@ -2,6 +2,4 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: exercise
-  labels:
-    name: exercise
     
