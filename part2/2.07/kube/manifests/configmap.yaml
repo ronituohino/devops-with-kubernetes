@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: exercise
+  name: configmap
+data:
+  MESSAGE: hello world
+  information.txt: |
+    this text is from file
+  PINGPONG_PG_USER: user
+  PINGPONG_PG_DB: database
+  PINGPONG_PG_HOST_AUTH_METHOD: password
