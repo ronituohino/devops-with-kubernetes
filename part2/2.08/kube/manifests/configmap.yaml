@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: project
+  name: configmap
+data:
+  TODO_API_PG_USER: user
+  TODO_API_PG_DB: database
+  TODO_API_PG_HOST_AUTH_METHOD: password
