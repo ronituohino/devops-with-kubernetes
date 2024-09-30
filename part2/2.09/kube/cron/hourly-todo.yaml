@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: project
+  name: hourly-todo
+spec:
+  schedule: "42 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: hourly-todo
+              image: ronituohino/generate-todo:2.09.5
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
