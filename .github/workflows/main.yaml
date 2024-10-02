@@ -12,7 +12,6 @@ env:
   TODO_API_PATH: ../services/todo-api
   TODO_APP_PATH: ../services/todo-app
   GENERATE_TODO_PATH: ../jobs/generate-todo
-  SERVICE_TO_WAIT_ON: todo-api-svc.project
 
 jobs:
   build-publish-deploy:
@@ -72,5 +71,5 @@ jobs:
           kustomize edit set image TODO_APP/IMAGE=gcr.io/$PROJECT_ID/todo-app:$BRANCH-$GITHUB_SHA
           kustomize edit set image GENERATE_TODO/IMAGE=gcr.io/$PROJECT_ID/generate-todo:$BRANCH-$GITHUB_SHA
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment $SERVICE_TO_WAIT_ON
+          kubectl rollout status deployment
           kubectl get services -o wide
