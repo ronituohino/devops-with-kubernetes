@@ -21,6 +21,8 @@ metadata:
 spec:
   serviceName: postgres-svc
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: postgresapp
@@ -72,7 +74,7 @@ metadata:
   name: pg-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
