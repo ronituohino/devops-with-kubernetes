@@ -63,7 +63,7 @@ jobs:
 
       - name: Decrypt secrets
         run: |
-          'echo "${{ secrets.SOPS_KEY }}" > key'
+          echo "${{ secrets.SOPS_KEY }}" > key
           sops --decrypt ./secrets/secret.enc.yaml > ./secrets/secret.yaml
 
       - name: Deploy
