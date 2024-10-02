@@ -12,7 +12,7 @@ env:
   TODO_API_PATH: ../services/todo-api
   TODO_APP_PATH: ../services/todo-app
   GENERATE_TODO_PATH: ../jobs/generate-todo
-  SERVICE_TO_WAIT_ON: todo-api-svc
+  SERVICE_TO_WAIT_ON: todo-api-svc.project
 
 jobs:
   build-publish-deploy:
