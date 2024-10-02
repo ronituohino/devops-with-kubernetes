@@ -10,5 +10,3 @@ spec:
   volumeMode: Filesystem # This declares that it will be mounted into pods as a directory
   accessModes:
     - ReadWriteMany
-  local:
-    path: /tmp/kube
