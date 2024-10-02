@@ -11,7 +11,6 @@ resources:
   - namespaces/namespace.yaml
   - secrets/secret.yaml
   - manifests/configmap.yaml
-  - volumes/persistentvolume.yaml
   - manifests/todo-api-pg.yaml
   - manifests/todo-api.yaml
   - manifests/todo-app.yaml
