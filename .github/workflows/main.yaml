@@ -2,8 +2,6 @@ name: Release application
 
 on:
   push:
-    branches:
-      - main
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -26,12 +24,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - uses: google-github-actions/auth@v2
         with:
           credentials_json: "${{ secrets.GKE_SA_KEY }}"
-
-      - name: Install sops
-        uses: mdgreenwald/mozilla-sops-action@v1.6.0
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
@@ -59,16 +55,28 @@ jobs:
           docker push "gcr.io/$PROJECT_ID/todo-app:$BRANCH-$GITHUB_SHA"
           docker push "gcr.io/$PROJECT_ID/generate-todo:$BRANCH-$GITHUB_SHA"
 
-      - name: Set up Kustomize
-        uses: imranismail/setup-kustomize@v2.1.0
+      - name: Install sops
+        uses: mdgreenwald/mozilla-sops-action@v1.6.0
 
       - name: Decrypt secrets
         run: |
           echo "${{ secrets.SOPS_KEY }}" > key
           sops --decrypt ./secrets/secret.enc.yaml > ./secrets/secret.yaml
 
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2.1.0
+
       - name: Deploy
         run: |-
+          if [[ $BRANCH == 'main' ]]
+          then 
+            kubectl config set-context --current --namespace=default
+            kustomize edit set namespace default
+          else
+            kubectl create namespace  || true
+            kubectl config set-context --current --namespace=$BRANCH
+            kustomize edit set namespace $BRANCH
+          fi
           kustomize edit set image TODO_API/IMAGE=gcr.io/$PROJECT_ID/todo-api:$BRANCH-$GITHUB_SHA
           kustomize edit set image TODO_APP/IMAGE=gcr.io/$PROJECT_ID/todo-app:$BRANCH-$GITHUB_SHA
           kustomize edit set image GENERATE_TODO/IMAGE=gcr.io/$PROJECT_ID/generate-todo:$BRANCH-$GITHUB_SHA
