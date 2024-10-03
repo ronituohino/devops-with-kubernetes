@@ -2,6 +2,12 @@ name: Branch delete
 
 on: delete
 
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+  BRANCH: ${{ github.ref_name }}
+
 jobs:
   delete:
     if: github.event.ref_type == 'branch'
@@ -24,3 +30,8 @@ jobs:
           cluster_name: "${{ env.GKE_CLUSTER }}"
           project_id: "${{ env.PROJECT_ID }}"
           location: "${{ env.GKE_ZONE }}"
+
+      - name: Delete all resources in branch namespace
+        run: |
+          kubectl delete all --all -n $BRANCH
+          kubectl delete namespace $BRANCH
