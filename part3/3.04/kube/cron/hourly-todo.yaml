@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: project
+  name: hourly-todo
+spec:
+  schedule: "1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: hourly-todo
+              image: GENERATE_TODO/IMAGE
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure

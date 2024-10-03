@@ -2,8 +2,6 @@ name: Release application
 
 on:
   push:
-    branches:
-      - main
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -21,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./part3/3.03/kube
+        working-directory: ./part3/3.04/kube
 
     steps:
       - name: Checkout
@@ -69,6 +67,15 @@ jobs:
 
       - name: Deploy
         run: |-
+          if [[ ${GITHUB_REF#refs/heads/} == 'main' ]]
+          then 
+            kubectl config set-context --current --namespace=default
+            kustomize edit set namespace default
+          else
+            kubectl create namespace  || true
+            kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+            kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+          fi
           kustomize edit set image TODO_API/IMAGE=gcr.io/$PROJECT_ID/todo-api:$BRANCH-$GITHUB_SHA
           kustomize edit set image TODO_APP/IMAGE=gcr.io/$PROJECT_ID/todo-app:$BRANCH-$GITHUB_SHA
           kustomize edit set image GENERATE_TODO/IMAGE=gcr.io/$PROJECT_ID/generate-todo:$BRANCH-$GITHUB_SHA

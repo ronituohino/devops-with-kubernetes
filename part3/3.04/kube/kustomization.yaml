@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: TODO_API/IMAGE
+    newName: ronituohino/todo-api:3.03.0
+  - name: TODO_APP/IMAGE
+    newName: ronituohino/todo-app:3.03.0
+  - name: GENERATE_TODO/IMAGE
+    newName: ronituohino/generate-todo:3.03.0
+resources:
+  - namespaces/namespace.yaml
+  - secrets/secret.yaml
+  - manifests/configmap.yaml
+  - manifests/todo-api-pg.yaml
+  - manifests/todo-api.yaml
+  - manifests/todo-app.yaml
+  - manifests/ingress.yaml
+  - cron/hourly-todo.yaml
