@@ -4,7 +4,7 @@ metadata:
   namespace: project
   name: daily-pg-backup
 spec:
-  schedule: "35 * * * *"
+  schedule: "22 * * * *"
   jobTemplate:
     spec:
       template:
@@ -30,4 +30,4 @@ spec:
                     configMapKeyRef:
                       name: configmap
                       key: TODO_API_PG_DB
-          restartPolicy: OnFailure
+          restartPolicy: Never

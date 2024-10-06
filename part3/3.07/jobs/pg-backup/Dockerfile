@@ -1,4 +1,4 @@
-FROM alpine:3.20.3
+FROM postgres:17.0-alpine3.20
 
 WORKDIR /usr
 
@@ -6,8 +6,7 @@ RUN apk add --update \
   python3 \
   curl \
   which \
-  bash \
-  postgresql-client
+  bash 
 
 COPY backup.sh .
 
