@@ -4,7 +4,7 @@ metadata:
   namespace: project
   name: daily-pg-backup
 spec:
-  schedule: "25 * * * *"
+  schedule: "45 * * * *"
   jobTemplate:
     spec:
       template:

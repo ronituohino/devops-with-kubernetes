@@ -11,4 +11,6 @@ RUN apk add --update \
 
 COPY backup.sh .
 
+RUN chmod +x backup.sh
+
 CMD ["./backup.sh"]
