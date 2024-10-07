@@ -41,8 +41,8 @@ spec:
               mountPath: /usr/src/app/cache
           resources:
             limits:
-              cpu: "600m"
-              memory: "512Mi"
+              cpu: "300m"
+              memory: "256Mi"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

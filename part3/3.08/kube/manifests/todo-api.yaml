@@ -49,8 +49,8 @@ spec:
                   key: TODO_API_PG_DB
           resources:
             limits:
-              cpu: "350m"
-              memory: "256Mi"
+              cpu: "150m"
+              memory: "128Mi"
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
