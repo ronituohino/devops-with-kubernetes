@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: exercise
+  name: log-output-svc
+spec:
+  type: NodePort
+  selector:
+    app: log-output
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: exercise
+  name: log-output
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      containers:
+        - name: log-output
+          image: ronituohino/log-output:3.09.0
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: MESSAGE
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/app/config
+              readOnly: true
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configmap
+            items:
+              - key: information.txt
+                path: information.txt
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: exercise
+  name: log-output-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: log-output
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 90
