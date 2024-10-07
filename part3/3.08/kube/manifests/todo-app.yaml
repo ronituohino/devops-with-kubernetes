@@ -39,6 +39,10 @@ spec:
           volumeMounts:
             - name: picture-cache
               mountPath: /usr/src/app/cache
+          resources:
+            limits:
+              cpu: "600m"
+              memory: "512Mi"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -52,3 +56,17 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: standard-rwo
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: todo-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: todo-app
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 90
