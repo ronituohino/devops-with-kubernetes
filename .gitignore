@@ -2,3 +2,4 @@ node_modules
 bin
 secret.yaml
 key.txt
+material

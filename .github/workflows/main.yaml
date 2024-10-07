@@ -21,7 +21,7 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, '#skip') }}
     defaults:
       run:
-        working-directory: ./part3/3.07/kube
+        working-directory: ./part3/3.08/kube
 
     steps:
       - name: Checkout
