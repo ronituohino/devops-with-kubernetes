@@ -13,7 +13,10 @@ resources:
   - namespaces/namespace.yaml
   - secrets/secret.yaml
   #   - serviceaccounts/gcp.yaml
+  - volumes/pv1.yaml
+  - volumes/pv2.yaml
   - manifests/configmap.yaml
+  - manifests/analysistemplate.yaml
   - manifests/todo-api-pg.yaml
   - manifests/todo-api.yaml
   - manifests/todo-app.yaml
