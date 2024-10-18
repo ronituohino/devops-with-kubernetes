@@ -66,28 +66,42 @@ function updateTodos(todos) {
     ul.removeChild(ul.lastChild);
   }
 
-  // Add new ones
+  // Render todos that are done at the bottom
   todos.forEach((todo) => {
-    const li = document.createElement("li");
-    li.classList.add("todo-entry");
-
-    const todoP = document.createElement("p");
-    const text = document.createTextNode(todo.Todo);
-    todoP.appendChild(text);
-    li.appendChild(todoP);
-
     if (todo.Done) {
+      const li = document.createElement("li");
+      li.classList.add("todo-entry");
       li.classList.add("todo-done");
-    } else {
+
+      const todoP = document.createElement("p");
+      const text = document.createTextNode(todo.Todo);
+      todoP.appendChild(text);
+      li.appendChild(todoP);
+
+      ul.insertBefore(li, ul.firstChild);
+    }
+  });
+
+  // Render todos that are not done at the top
+  todos.forEach((todo) => {
+    if (!todo.Done) {
+      const li = document.createElement("li");
+      li.classList.add("todo-entry");
+
+      const todoP = document.createElement("p");
+      const text = document.createTextNode(todo.Todo);
+      todoP.appendChild(text);
+      li.appendChild(todoP);
+
       const todoBtn = document.createElement("button");
       todoBtn.dataset.id = todo.Id;
       const btnText = document.createTextNode("Done");
       todoBtn.appendChild(btnText);
       todoBtn.onclick = markTodoDone;
       li.appendChild(todoBtn);
-    }
 
-    ul.insertBefore(li, ul.firstChild);
+      ul.insertBefore(li, ul.firstChild);
+    }
   });
 }
 

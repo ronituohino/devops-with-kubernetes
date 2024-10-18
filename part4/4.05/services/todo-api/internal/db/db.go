@@ -50,7 +50,7 @@ func createSchema(db *pg.DB) error {
 
 func GetTodos(db *pg.DB) []Todo {
 	var todos []Todo
-	err := db.Model(&todos).Column("id", "todo").Select()
+	err := db.Model(&todos).Select()
 
 	if err != nil {
 		fmt.Println("Error querying todos", err)
@@ -79,8 +79,7 @@ func MarkDone(id int64, db *pg.DB) []Todo {
 		Done: true,
 	}
 
-	// Fix this
-	_, err := db.Model(todo).WherePK().Update()
+	_, err := db.Model(todo).Set("done = ?done").Where("id = ?id").Update()
 
 	if err != nil {
 		fmt.Println("Error updating todo", err)
