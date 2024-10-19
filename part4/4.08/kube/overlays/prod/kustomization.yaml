@@ -7,7 +7,9 @@ resources:
   - cron/daily-pg-backup.yaml
 
 patches:
-  - path: manifests/hpa.yaml
+  - path: manifests/broadcaster.yaml
+  - path: manifests/todo-api.yaml
+  - path: manifests/todo-app.yaml
 
 namePrefix: prod-
 

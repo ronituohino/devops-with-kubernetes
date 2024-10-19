@@ -7,7 +7,8 @@ resources:
 
 patches:
 - path: manifests/broadcaster.yaml
-- path: manifests/hpa.yaml
+- path: manifests/todo-api.yaml
+- path: manifests/todo-app.yaml
 
 namePrefix: staging-
 
