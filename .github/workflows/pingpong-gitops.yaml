@@ -4,6 +4,7 @@ on:
   push:
 
 env:
+  PROJECT_ROOT: ./part4/4.07/kube
   PING_PONG_PATH: ../services/ping-pong
   LOG_OUTPUT_PATH: ../services/log-output
 
@@ -14,7 +15,7 @@ jobs:
     if: ${{ contains(github.event.head_commit.message, '#pingpong') }}
     defaults:
       run:
-        working-directory: ./part4/4.07/kube
+        working-directory: $PROJECT_ROOT
 
     steps:
       - name: Checkout
@@ -47,5 +48,5 @@ jobs:
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          add: "./kustomization.yaml"
+          add: "$PROJECT_ROOT/kustomization.yaml"
           message: New version released ${{ github.sha }}
