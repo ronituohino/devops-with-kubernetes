@@ -5,6 +5,9 @@ resources:
 - namespaces/namespace.yaml
 - ./../../base
 
+patches:
+  - path: manifests/broadcaster.yaml
+
 images:
 - name: BROADCASTER/IMAGE
   newName: ronituohino/staging-broadcaster
