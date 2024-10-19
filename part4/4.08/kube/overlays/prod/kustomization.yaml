@@ -6,6 +6,9 @@ resources:
   - ./../../base
   - cron/daily-pg-backup.yaml
 
+patches:
+  - path: manifests/hpa.yaml
+
 namePrefix: prod-
 
 images:

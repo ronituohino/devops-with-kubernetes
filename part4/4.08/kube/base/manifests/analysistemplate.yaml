@@ -10,6 +10,6 @@ spec:
       successCondition: result[0] < 0.25
       provider:
         prometheus:
-          address: http://kube-prometheus-stack-1728-prometheus.prometheus.svc.cluster.local:9090 # DNS name for my Prometheus, find yours with kubectl describe svc ...
+          address: http://kube-prometheus-stack-1729-prometheus.prometheus.svc.cluster.local:9090 # DNS name for my Prometheus, find yours with kubectl describe svc ...
           query: |
             sum(rate(container_cpu_usage_seconds_total{namespace="project"}[1m]))

@@ -1,0 +1,26 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: prod-todo-app-hpa
+spec:
+  scaleTargetRef:
+    name: prod-todo-app
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: prod-todo-api-hpa
+spec:
+  scaleTargetRef:
+    name: prod-todo-api
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: prod-broadcaster-hpa
+spec:
+  scaleTargetRef:
+    name: prod-broadcaster

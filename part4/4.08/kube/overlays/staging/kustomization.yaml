@@ -7,6 +7,7 @@ resources:
 
 patches:
 - path: manifests/broadcaster.yaml
+- path: manifests/hpa.yaml
 
 namePrefix: staging-
 
