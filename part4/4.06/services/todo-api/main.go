@@ -54,7 +54,7 @@ func main() {
 		newTodo, todos := db.AddTodo(requestBody.Todo, database)
 		fmt.Printf("Added todo: %v\n", requestBody.Todo)
 
-		broadcastMessage := fmt.Sprintf("🚀 added a new todo: %v", newTodo)
+		broadcastMessage := fmt.Sprintf("🚀 added a new todo:\n\n```\n%+v\n```", newTodo)
 		bc.PublishMessage(broadcastMessage, broadcaster)
 
 		c.JSON(http.StatusOK, todos)
@@ -72,7 +72,7 @@ func main() {
 		newTodo, todos := db.MarkDone(id, database)
 		fmt.Printf("Updated todo: %v\n", id)
 
-		broadcastMessage := fmt.Sprintf("🦅💥💯 todo completed: %v", newTodo)
+		broadcastMessage := fmt.Sprintf("🦅💥💯 todo completed:\n\n```\n%+v\n```", newTodo)
 		bc.PublishMessage(broadcastMessage, broadcaster)
 
 		c.JSON(http.StatusOK, todos)

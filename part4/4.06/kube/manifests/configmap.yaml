@@ -7,4 +7,4 @@ data:
   TODO_API_PG_USER: user
   TODO_API_PG_DB: database
   TODO_API_PG_HOST_AUTH_METHOD: password
-  NATS_URL: idk
+  NATS_URL: nats://my-nats.default.svc.cluster.local:4222

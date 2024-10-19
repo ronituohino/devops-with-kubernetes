@@ -8,15 +8,7 @@ if (!natsUrl) {
 
 const nc = await connect({ servers: natsUrl });
 const sc = StringCodec();
-const sub = nc.subscribe("hello");
-
-(async () => {
-  for await (const m of sub) {
-    console.log(`[${sub.getProcessed()}]: ${sc.decode(m.data)}`);
-    notify(sc.decode(m.data));
-  }
-  console.log("subscription closed");
-})();
+const sub = nc.subscribe("todos", { queue: "message-broadcast" });
 
 async function notify(payload: string) {
   const webhookUrl = Deno.env.get("DISCORD_WEBHOOK_URL");
@@ -41,3 +33,14 @@ async function notify(payload: string) {
     console.error("Error sending Discord notification");
   }
 }
+
+async function watchMessages() {
+  for await (const m of sub) {
+    console.log(`[${sub.getProcessed()}]: ${sc.decode(m.data)}`);
+    notify(sc.decode(m.data));
+  }
+  console.log("subscription closed");
+}
+
+console.log("Broadcaster watching for messages!");
+await watchMessages();

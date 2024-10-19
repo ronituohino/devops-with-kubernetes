@@ -1,12 +1,11 @@
 FROM denoland/deno:2.0.2
 
 WORKDIR /app
-USER deno
-
-COPY deps.ts .
-RUN deno install --entrypoint deps.ts
 
 COPY . .
-RUN deno cache main.ts
 
-CMD ["run", "--allow-net", "main.ts"]
+RUN deno install
+
+USER deno
+
+CMD ["run", "--allow-net", "--allow-env", "main.ts"]
