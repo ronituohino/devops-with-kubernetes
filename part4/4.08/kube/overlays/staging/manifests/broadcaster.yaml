@@ -1,3 +1,8 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: project
+  name: broadcaster
 spec:
   template:
     spec:
@@ -6,7 +11,7 @@ spec:
           image: BROADCASTER/IMAGE
           env:
             - name: NOTIFICATIONS_DISABLED
-              value: 1
+              value: "1"
             - name: NATS_URL
               valueFrom:
                 configMapKeyRef:

@@ -69,5 +69,6 @@ jobs:
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          add: "${{ env.PROJECT_ROOT }}/overlays/$ENVI/kustomization.yaml"
+          add:
+            "${{ env.PROJECT_ROOT }}/overlays/${{ env.ENVI }}/kustomization.yaml"
           message: New $ENVI version released ${{ github.sha }}
