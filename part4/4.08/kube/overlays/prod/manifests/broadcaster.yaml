@@ -17,6 +17,11 @@ spec:
         - name: broadcaster
           image: BROADCASTER/IMAGE
           env:
+            - name: DISCORD_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: prod-discord-webhook-url
+                  key: DISCORD_WEBHOOK_URL
             - name: NATS_URL
               valueFrom:
                 configMapKeyRef:

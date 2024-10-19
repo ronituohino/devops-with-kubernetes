@@ -34,9 +34,17 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
 ```
 
 Prometheus
+
 ```
 kubectl create namespace prometheus
 helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
+```
+
+NATS
+
+```
+helm install --set auth.enabled=false my-nats oci://registry-1.docker.io/bitnamicharts/nats
+helm upgrade --set metrics.enabled=true,auth.enabled=false my-nats oci://registry-1.docker.io/bitnamicharts/nats
 ```
 
 Argo
