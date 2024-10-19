@@ -6,21 +6,21 @@ resources:
 - ./../../base
 
 patches:
-  - path: manifests/broadcaster.yaml
+- path: manifests/broadcaster.yaml
 
 images:
 - name: BROADCASTER/IMAGE
   newName: ronituohino/staging-broadcaster
-  newTag: 41d3c945fe47e1240d217a2f3ad12676ee00e53d
+  newTag: 995f0dba818184f04346ce9dccb9b9dc74e81b1f
 - name: GENERATE_TODO/IMAGE
   newName: ronituohino/staging-generate-todo
-  newTag: 41d3c945fe47e1240d217a2f3ad12676ee00e53d
+  newTag: 995f0dba818184f04346ce9dccb9b9dc74e81b1f
 - name: PG_BACKUP/IMAGE
   newName: ronituohino/staging-pg-backup
-  newTag: 41d3c945fe47e1240d217a2f3ad12676ee00e53d
+  newTag: 995f0dba818184f04346ce9dccb9b9dc74e81b1f
 - name: TODO_API/IMAGE
   newName: ronituohino/staging-todo-api
-  newTag: 41d3c945fe47e1240d217a2f3ad12676ee00e53d
+  newTag: 995f0dba818184f04346ce9dccb9b9dc74e81b1f
 - name: TODO_APP/IMAGE
   newName: ronituohino/staging-todo-app
-  newTag: 41d3c945fe47e1240d217a2f3ad12676ee00e53d
+  newTag: 995f0dba818184f04346ce9dccb9b9dc74e81b1f
