@@ -14,16 +14,16 @@ namePrefix: staging-
 images:
 - name: BROADCASTER/IMAGE
   newName: ronituohino/staging-broadcaster
-  newTag: d1787f8ebcb1914fd0c8f42a6d6fd3018e9c8044
+  newTag: 4b0262a1faf373edd80fb9bca9f6e5baaec47b31
 - name: GENERATE_TODO/IMAGE
   newName: ronituohino/staging-generate-todo
-  newTag: d1787f8ebcb1914fd0c8f42a6d6fd3018e9c8044
+  newTag: 4b0262a1faf373edd80fb9bca9f6e5baaec47b31
 - name: PG_BACKUP/IMAGE
   newName: ronituohino/staging-pg-backup
-  newTag: d1787f8ebcb1914fd0c8f42a6d6fd3018e9c8044
+  newTag: 4b0262a1faf373edd80fb9bca9f6e5baaec47b31
 - name: TODO_API/IMAGE
   newName: ronituohino/staging-todo-api
-  newTag: d1787f8ebcb1914fd0c8f42a6d6fd3018e9c8044
+  newTag: 4b0262a1faf373edd80fb9bca9f6e5baaec47b31
 - name: TODO_APP/IMAGE
   newName: ronituohino/staging-todo-app
-  newTag: d1787f8ebcb1914fd0c8f42a6d6fd3018e9c8044
+  newTag: 4b0262a1faf373edd80fb9bca9f6e5baaec47b31
