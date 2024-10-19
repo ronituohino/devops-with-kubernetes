@@ -11,6 +11,13 @@ To avoid having to push encoded secrets to the repository, I've manually set the
 
 Note that the actual value for the secret has to be encoded with `base64`.
 
+### Setting up argo
+
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
 ### Ping Pong secrets
 
 ```

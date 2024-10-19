@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: project
+  name: daily-pg-backup
+spec:
+  schedule: "0 18 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: my-service-account
+          containers:
+            - name: daily-pg-backup
+              image: PG_BACKUP/IMAGE
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: GCLOUD_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: gcloud-token
+                      key: TOKEN
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: todo-api-pg-password
+                      key: TODO_API_PG_PASSWORD
+                - name: PGUSER
+                  valueFrom:
+                    configMapKeyRef:
+                      name: configmap
+                      key: TODO_API_PG_USER
+                - name: PGDATABASE
+                  valueFrom:
+                    configMapKeyRef:
+                      name: configmap
+                      key: TODO_API_PG_DB
+          restartPolicy: Never

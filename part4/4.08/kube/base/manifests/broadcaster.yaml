@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: project
+  name: broadcaster
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: broadcaster
+  strategy:
+    canary:
+      steps:
+        - setWeight: 100
+        - analysis:
+            templates:
+              - templateName: cpu-usage
+  template:
+    metadata:
+      labels:
+        app: broadcaster
+    spec:
+      containers:
+        - name: broadcaster
+          image: BROADCASTER/IMAGE
+          env:
+            - name: DISCORD_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord-webhook-url
+                  key: DISCORD_WEBHOOK_URL
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: NATS_URL
+          resources:
+            limits:
+              cpu: "50m"
+              memory: "64Mi"
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: broadcaster-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    name: broadcaster
+  minReplicas: 6
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 90
