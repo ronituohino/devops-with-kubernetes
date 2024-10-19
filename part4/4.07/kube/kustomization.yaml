@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: PING_PONG/IMAGE
+    newName: ronituohino/ping-pong:4.01.1
+  - name: LOG_OUTPUT/IMAGE
+    newName: ronituohino/log-output:4.01.2
+resources:
+  - namespaces/namespace.yaml
+  - secrets/secret.yaml
+  - volumes/pv1.yaml
+  - volumes/pv2.yaml
+  - manifests/configmap.yaml
+  - manifests/ping-pong-postgres.yaml
+  - manifests/ping-pong.yaml
+  - manifests/log-output.yaml
+  - manifests/ingress.yaml

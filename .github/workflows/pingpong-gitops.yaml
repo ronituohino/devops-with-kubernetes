@@ -1,0 +1,49 @@
+name: Build and publish application
+
+on:
+  push:
+
+env:
+  PING_PONG_PATH: ../services/ping-pong
+  LOG_OUTPUT_PATH: ../services/log-output
+
+jobs:
+  build-publish:
+    name: Build, Push, Release
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, '#pingpong') }}
+    defaults:
+      run:
+        working-directory: ./part4/4.07/kube
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build images
+        run: |-
+          docker build -t "ronituohino/ping-pong:$GITHUB_SHA" "$PING_PONG_PATH"
+          docker build -t "ronituohino/log-output:$GITHUB_SHA" "$LOG_OUTPUT_PATH"
+
+      - name: Push images
+        run: |-
+          docker push "ronituohino/ping-pong:$GITHUB_SHA"
+          docker push "ronituohino/log-output:$GITHUB_SHA"
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Use right image
+        run: kustomize edit set image PROJECT/IMAGE=ronituohino/dwk1:$GITHUB_SHA
+
+      - name: commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "kustomization.yaml"
+          message: New version released ${{ github.sha }}

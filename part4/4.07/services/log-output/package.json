@@ -1,0 +1,16 @@
+{
+  "name": "log-output",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.15.3",
+    "koa-router": "^13.0.1"
+  }
+}
