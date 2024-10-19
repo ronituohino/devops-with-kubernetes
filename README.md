@@ -26,6 +26,19 @@ Make persistent volumes work
 docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
 ```
 
+Argo Rollouts
+
+```
+kubectl create namespace argo-rollouts
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+```
+
+Prometheus
+```
+kubectl create namespace prometheus
+helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
+```
+
 Argo
 
 ```
@@ -44,19 +57,6 @@ Then, login
 ```
 admin
 <pass>
-```
-
-Argo Rollouts
-
-```
-kubectl create namespace argo-rollouts
-kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
-```
-
-Prometheus
-```
-kubectl create namespace prometheus
-helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
 ```
 
 ### Ping Pong secrets
@@ -81,6 +81,12 @@ metadata:
   name: todo-api-pg-password
 data:
   TODO_API_PG_PASSWORD: ...
+```
+
+### Local project
+
+```
+kubectl apply -n argocd -f argo/
 ```
 
 ## GKE

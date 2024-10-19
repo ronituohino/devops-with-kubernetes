@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: project
+  name: todo-app
+spec:
+  strategy:
+    canary:
+      steps:
+        - setWeight: 100
+        - analysis:
+            templates:
+              - templateName: prod-cpu-usage
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: todo-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    name: prod-todo-app

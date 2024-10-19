@@ -10,7 +10,7 @@ spec:
         - setWeight: 100
         - analysis:
             templates:
-              - templateName: staging-cpu-usage
+              - templateName: prod-cpu-usage
   template:
     spec:
       containers:
@@ -38,4 +38,4 @@ spec:
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
-    name: staging-broadcaster
+    name: prod-broadcaster
