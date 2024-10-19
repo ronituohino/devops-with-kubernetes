@@ -11,6 +11,12 @@ spec:
         - analysis:
             templates:
               - templateName: prod-cpu-usage
+  template:
+    spec:
+      volumes:
+        - name: picture-cache
+          persistentVolumeClaim:
+            claimName: prod-picture-cache-claim
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler

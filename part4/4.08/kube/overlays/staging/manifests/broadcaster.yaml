@@ -22,7 +22,7 @@ spec:
             - name: NATS_URL
               valueFrom:
                 configMapKeyRef:
-                  name: configmap
+                  name: staging-configmap
                   key: NATS_URL
           resources:
             limits:

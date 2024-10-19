@@ -12,6 +12,32 @@ spec:
         - analysis:
             templates:
               - templateName: prod-cpu-usage
+  template:
+    spec:
+      containers:
+        - name: todo-api
+          image: TODO_API/IMAGE
+          env:
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: prod-todo-api-pg-password
+                  key: TODO_API_PG_PASSWORD
+            - name: PG_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: prod-configmap
+                  key: TODO_API_PG_USER
+            - name: PG_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: prod-configmap
+                  key: TODO_API_PG_DB
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: prod-configmap
+                  key: NATS_URL
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler

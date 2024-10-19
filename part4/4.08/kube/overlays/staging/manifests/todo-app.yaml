@@ -11,6 +11,12 @@ spec:
         - analysis:
             templates:
               - templateName: staging-cpu-usage
+  template:
+    spec:
+      volumes:
+        - name: picture-cache
+          persistentVolumeClaim:
+            claimName: staging-picture-cache-claim
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
