@@ -3,10 +3,10 @@ kind: Kustomization
 images:
 - name: LOG_OUTPUT/IMAGE
   newName: ronituohino/log-output
-  newTag: cde80170ece19d5bb754545cc2153eb79774f0d4
+  newTag: e03c9cb6d3329ff1c22aa05406842759ec9407dd
 - name: PING_PONG/IMAGE
   newName: ronituohino/ping-pong
-  newTag: cde80170ece19d5bb754545cc2153eb79774f0d4
+  newTag: e03c9cb6d3329ff1c22aa05406842759ec9407dd
 resources:
 - namespaces/namespace.yaml
 - manifests/configmap.yaml
