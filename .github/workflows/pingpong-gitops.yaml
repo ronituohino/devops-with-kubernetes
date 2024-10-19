@@ -15,7 +15,7 @@ jobs:
     if: ${{ contains(github.event.head_commit.message, '#pingpong') }}
     defaults:
       run:
-        working-directory: $PROJECT_ROOT
+        working-directory: ${{ env.PROJECT_ROOT }}
 
     steps:
       - name: Checkout
