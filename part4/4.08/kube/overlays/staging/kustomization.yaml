@@ -1,19 +1,26 @@
 resources:
-  - ./../../base
+- ./../../base
 
 patches:
-  - path: manifests/broadcaster.yaml
+- path: manifests/broadcaster.yaml
 
 namePrefix: staging-
 
 images:
-  - name: TODO_API/IMAGE
-    newName: ronituohino/todo-api:4.06.2
-  - name: TODO_APP/IMAGE
-    newName: ronituohino/todo-app:4.05.4
-  - name: GENERATE_TODO/IMAGE
-    newName: ronituohino/generate-todo:4.02.0
-  - name: PG_BACKUP/IMAGE
-    newName: ronituohino/pg-backup:3.07.1
-  - name: BROADCASTER/IMAGE
-    newName: ronituohino/broadcaster:4.06.4
+- name: BROADCASTER/IMAGE
+  newName: ronituohino/staging-broadcaster
+  newTag: 28f1dddff53a4aafac12f0b85959887491ec1a6d
+- name: GENERATE_TODO/IMAGE
+  newName: ronituohino/staging-generate-todo
+  newTag: 28f1dddff53a4aafac12f0b85959887491ec1a6d
+- name: PG_BACKUP/IMAGE
+  newName: ronituohino/staging-pg-backup
+  newTag: 28f1dddff53a4aafac12f0b85959887491ec1a6d
+- name: TODO_API/IMAGE
+  newName: ronituohino/staging-todo-api
+  newTag: 28f1dddff53a4aafac12f0b85959887491ec1a6d
+- name: TODO_APP/IMAGE
+  newName: ronituohino/staging-todo-app
+  newTag: 28f1dddff53a4aafac12f0b85959887491ec1a6d
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
