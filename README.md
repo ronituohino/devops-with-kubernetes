@@ -13,6 +13,12 @@ Note that the actual value for the secret has to be encoded with `base64`.
 
 ### Setting up
 
+The cluster
+
+```
+k3d cluster create
+```
+
 Argo
 
 ```

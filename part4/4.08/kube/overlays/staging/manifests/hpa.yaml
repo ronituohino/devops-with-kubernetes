@@ -1,26 +1,32 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  namespace: staging-project
-  name: staging-todo-app-hpa
+  namespace: project
+  name: todo-api-hpa
 spec:
   scaleTargetRef:
-    name: staging-todo-app
----
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  namespace: staging-project
-  name: staging-todo-api-hpa
-spec:
-  scaleTargetRef:
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
     name: staging-todo-api
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  namespace: staging-project
-  name: staging-broadcaster-hpa
+  namespace: project
+  name: todo-app-hpa
 spec:
   scaleTargetRef:
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    name: staging-todo-app
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: broadcaster-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
     name: staging-broadcaster
