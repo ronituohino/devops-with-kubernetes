@@ -16,7 +16,7 @@ env:
 
 jobs:
   build-publish:
-    name: Build, Push, Release
+    name: Project Build and Release
     runs-on: ubuntu-latest
     env:
       ENVI: staging
