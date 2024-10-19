@@ -13,10 +13,17 @@ Note that the actual value for the secret has to be encoded with `base64`.
 
 ### Setting up
 
-The cluster
+#### The cluster
 
 ```
-k3d cluster create
+k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+kubectl cluster-info
+```
+
+Make persistent volumes work
+
+```
+docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
 ```
 
 Argo
@@ -24,6 +31,19 @@ Argo
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+To login to Argo, port forward `argocd-server`  
+Then, get password
+```
+kubectl get -n argocd secrets argocd-initial-admin-secret -o yaml
+echo '<encoded pass>' | base64 --decode
+```
+
+Then, login  
+```
+admin
+<pass>
 ```
 
 Argo Rollouts
