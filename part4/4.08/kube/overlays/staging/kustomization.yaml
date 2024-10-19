@@ -2,27 +2,27 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: staging-project
 resources:
-  - namespaces/namespace.yaml
-  - ./../../base
+- namespaces/namespace.yaml
+- ./../../base
 
 patches:
-  - path: manifests/broadcaster.yaml
+- path: manifests/broadcaster.yaml
 
 namePrefix: staging-
 
 images:
-  - name: BROADCASTER/IMAGE
-    newName: ronituohino/staging-broadcaster
-    newTag: f3c84f7000213456379138843f9cf73b147eb579
-  - name: GENERATE_TODO/IMAGE
-    newName: ronituohino/staging-generate-todo
-    newTag: f3c84f7000213456379138843f9cf73b147eb579
-  - name: PG_BACKUP/IMAGE
-    newName: ronituohino/staging-pg-backup
-    newTag: f3c84f7000213456379138843f9cf73b147eb579
-  - name: TODO_API/IMAGE
-    newName: ronituohino/staging-todo-api
-    newTag: f3c84f7000213456379138843f9cf73b147eb579
-  - name: TODO_APP/IMAGE
-    newName: ronituohino/staging-todo-app
-    newTag: f3c84f7000213456379138843f9cf73b147eb579
+- name: BROADCASTER/IMAGE
+  newName: ronituohino/staging-broadcaster
+  newTag: 9ffef364c09d130b8c31645dc75c97351d4abf48
+- name: GENERATE_TODO/IMAGE
+  newName: ronituohino/staging-generate-todo
+  newTag: 9ffef364c09d130b8c31645dc75c97351d4abf48
+- name: PG_BACKUP/IMAGE
+  newName: ronituohino/staging-pg-backup
+  newTag: 9ffef364c09d130b8c31645dc75c97351d4abf48
+- name: TODO_API/IMAGE
+  newName: ronituohino/staging-todo-api
+  newTag: 9ffef364c09d130b8c31645dc75c97351d4abf48
+- name: TODO_APP/IMAGE
+  newName: ronituohino/staging-todo-app
+  newTag: 9ffef364c09d130b8c31645dc75c97351d4abf48
