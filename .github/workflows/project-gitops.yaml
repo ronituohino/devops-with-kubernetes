@@ -71,4 +71,4 @@ jobs:
         with:
           add:
             "${{ env.PROJECT_ROOT }}/overlays/${{ env.ENVI }}/kustomization.yaml"
-          message: New $ENVI version released ${{ github.sha }}
+          message: New ${{ env.ENVI }} version released ${{ github.sha }}

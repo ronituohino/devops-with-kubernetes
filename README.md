@@ -11,11 +11,20 @@ To avoid having to push encoded secrets to the repository, I've manually set the
 
 Note that the actual value for the secret has to be encoded with `base64`.
 
-### Setting up argo
+### Setting up
+
+Argo
 
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+Argo Rollouts
+
+```
+kubectl create namespace argo-rollouts
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
 ```
 
 ### Ping Pong secrets
