@@ -6,13 +6,6 @@ resources:
   - ./../../base
   - cron/daily-pg-backup.yaml
 
-patches:
-  - path: manifests/broadcaster.yaml
-  - path: manifests/todo-api.yaml
-  - path: manifests/todo-app.yaml
-
-namePrefix: prod-
-
 images:
   - name: TODO_API/IMAGE
     newName: ronituohino/todo-api:4.06.2
