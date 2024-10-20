@@ -3,8 +3,14 @@ kind: Kustomization
 namespace: prod-project
 resources:
   - namespaces/namespace.yaml
+  - volumes/pv1.yaml
+  - volumes/pv2.yaml
   - ./../../base
   - cron/daily-pg-backup.yaml
+
+patches:
+  - path: manifests/todo-api-pg.yaml
+  - path: manifests/todo-app.yaml
 
 images:
   - name: TODO_API/IMAGE

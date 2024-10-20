@@ -64,16 +64,3 @@ spec:
             - name: pg-pvc-vol
               mountPath: /var/lib/postgresql/data
               subPath: postgres
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  namespace: project
-  name: pg-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-  storageClassName: scn-pv-2

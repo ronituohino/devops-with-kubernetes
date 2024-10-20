@@ -3,10 +3,14 @@ kind: Kustomization
 namespace: staging-project
 resources:
 - namespaces/namespace.yaml
+- volumes/pv1.yaml
+- volumes/pv2.yaml
 - ./../../base
 
 patches:
 - path: manifests/broadcaster.yaml
+- path: manifests/todo-api-pg.yaml
+- path: manifests/todo-app.yaml
 
 images:
 - name: BROADCASTER/IMAGE

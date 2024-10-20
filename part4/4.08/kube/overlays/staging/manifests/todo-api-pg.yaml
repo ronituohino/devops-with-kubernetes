@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: project
+  name: postgres-stset
+spec:
+  template:
+    spec:
+      volumes:
+        - name: pg-pvc-vol
+          persistentVolumeClaim:
+            claimName: staging-pg-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: project
+  name: staging-pg-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+  storageClassName: staging-scn-pv-2

@@ -2,11 +2,11 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   namespace: project
-  name: pv-2
+  name: prod-pv-2
 spec:
-  storageClassName: scn-pv-2
+  storageClassName: prod-scn-pv-2
   capacity:
-    storage: 200Mi
+    storage: 150Mi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce

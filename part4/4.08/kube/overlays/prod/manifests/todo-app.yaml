@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: project
+  name: todo-app
+spec:
+  template:
+    spec:
+      volumes:
+        - name: picture-cache
+          persistentVolumeClaim:
+            claimName: prod-picture-cache-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: project
+  name: prod-picture-cache-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+  storageClassName: prod-scn-pv-1
