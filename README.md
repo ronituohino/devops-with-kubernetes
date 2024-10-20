@@ -85,7 +85,23 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  namespace: project
+  namespace: prod-project
+  name: todo-api-pg-password
+data:
+  TODO_API_PG_PASSWORD: ...
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: prod-project
+  name: discord-webhook-url
+data:
+  DISCORD_WEBHOOK_URL: ...
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: staging-project
   name: todo-api-pg-password
 data:
   TODO_API_PG_PASSWORD: ...
@@ -93,8 +109,16 @@ data:
 
 ### Local project
 
+Create argo applications
+
 ```
 kubectl apply -n argocd -f argo/
+```
+
+Create above secrets and apply them
+
+```
+kubectl apply -f secrets/
 ```
 
 ## GKE
