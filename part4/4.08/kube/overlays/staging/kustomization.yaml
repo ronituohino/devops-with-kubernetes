@@ -15,16 +15,16 @@ patches:
 images:
 - name: BROADCASTER/IMAGE
   newName: ronituohino/staging-broadcaster
-  newTag: f511ce41039608ee888320c6386187d536d194fd
+  newTag: ff043eb88d8fc334357c16b564e7046279f47a51
 - name: GENERATE_TODO/IMAGE
   newName: ronituohino/staging-generate-todo
-  newTag: f511ce41039608ee888320c6386187d536d194fd
+  newTag: ff043eb88d8fc334357c16b564e7046279f47a51
 - name: PG_BACKUP/IMAGE
   newName: ronituohino/staging-pg-backup
-  newTag: f511ce41039608ee888320c6386187d536d194fd
+  newTag: ff043eb88d8fc334357c16b564e7046279f47a51
 - name: TODO_API/IMAGE
   newName: ronituohino/staging-todo-api
-  newTag: f511ce41039608ee888320c6386187d536d194fd
+  newTag: ff043eb88d8fc334357c16b564e7046279f47a51
 - name: TODO_APP/IMAGE
   newName: ronituohino/staging-todo-app
-  newTag: f511ce41039608ee888320c6386187d536d194fd
+  newTag: ff043eb88d8fc334357c16b564e7046279f47a51
