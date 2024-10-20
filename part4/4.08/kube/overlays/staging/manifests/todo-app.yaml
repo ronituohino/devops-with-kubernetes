@@ -10,16 +10,3 @@ spec:
         - name: picture-cache
           persistentVolumeClaim:
             claimName: staging-picture-cache-claim
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  namespace: project
-  name: staging-picture-cache-claim
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-  storageClassName: staging-scn-pv-1

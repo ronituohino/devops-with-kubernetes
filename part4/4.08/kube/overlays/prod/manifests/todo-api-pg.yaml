@@ -10,16 +10,3 @@ spec:
         - name: pg-pvc-vol
           persistentVolumeClaim:
             claimName: prod-pg-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  namespace: project
-  name: prod-pg-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-  storageClassName: prod-scn-pv-2

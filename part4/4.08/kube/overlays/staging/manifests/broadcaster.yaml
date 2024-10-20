@@ -19,3 +19,12 @@ spec:
           env:
             - name: NOTIFICATIONS_DISABLED
               value: "1"
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: NATS_URL
+          resources:
+            limits:
+              cpu: "50m"
+              memory: "64Mi"
