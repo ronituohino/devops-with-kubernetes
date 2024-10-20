@@ -12,6 +12,7 @@ resources:
 patches:
 - path: manifests/broadcaster.yaml
 - path: manifests/todo-api-pg.yaml
+- path: manifests/todo-api.yaml
 - path: manifests/todo-app.yaml
 
 images:
