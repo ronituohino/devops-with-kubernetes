@@ -16,13 +16,18 @@ patches:
 - path: manifests/todo-app.yaml
 
 images:
-- name: TODO_API/IMAGE
-  newName: ronituohino/todo-api:4.06.2
-- name: TODO_APP/IMAGE
-  newName: ronituohino/todo-app:4.05.4
-- name: GENERATE_TODO/IMAGE
-  newName: ronituohino/generate-todo:4.02.0
-- name: PG_BACKUP/IMAGE
-  newName: ronituohino/pg-backup:3.07.1
 - name: BROADCASTER/IMAGE
-  newName: ronituohino/broadcaster:4.06.4
+  newName: ronituohino/prod-broadcaster
+  newTag: f9afdb7d13af55a3af54843bab87dcae5ff69e9c
+- name: GENERATE_TODO/IMAGE
+  newName: ronituohino/prod-generate-todo
+  newTag: f9afdb7d13af55a3af54843bab87dcae5ff69e9c
+- name: PG_BACKUP/IMAGE
+  newName: ronituohino/prod-pg-backup
+  newTag: f9afdb7d13af55a3af54843bab87dcae5ff69e9c
+- name: TODO_API/IMAGE
+  newName: ronituohino/prod-todo-api
+  newTag: f9afdb7d13af55a3af54843bab87dcae5ff69e9c
+- name: TODO_APP/IMAGE
+  newName: ronituohino/prod-todo-app
+  newTag: f9afdb7d13af55a3af54843bab87dcae5ff69e9c
