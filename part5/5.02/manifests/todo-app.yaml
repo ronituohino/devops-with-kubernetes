@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app-svc
+  namespace: project
+spec:
+  ports:
+    - port: 2345
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: todo-app
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+  namespace: project
+spec:
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - image: TODO_APP/IMAGE
+          name: todo-app
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 150m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /usr/src/app/cache
+              name: picture-cache
+      volumes:
+        - name: picture-cache
+          persistentVolumeClaim:
+            claimName: picture-cache-claim
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: todo-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: todo-app
+  minReplicas: 2
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 90

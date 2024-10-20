@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-api-svc
+  namespace: project
+spec:
+  ports:
+    - port: 2346
+      protocol: TCP
+      targetPort: 3001
+  selector:
+    app: todo-api
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: todo-api
+  name: todo-api
+  namespace: project
+spec:
+  selector:
+    matchLabels:
+      app: todo-api
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: todo-api
+    spec:
+      containers:
+        - env:
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: TODO_API_PG_PASSWORD
+                  name: todo-api-pg-password
+            - name: PG_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: TODO_API_PG_USER
+                  name: configmap
+            - name: PG_DB
+              valueFrom:
+                configMapKeyRef:
+                  key: TODO_API_PG_DB
+                  name: configmap
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: NATS_URL
+                  name: configmap
+          image: TODO_API/IMAGE
+          name: todo-api
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 75m
+              memory: 64Mi
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: project
+  name: todo-api-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: todo-api
+  minReplicas: 2
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 90

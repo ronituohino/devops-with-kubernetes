@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: project
+  name: pv-2
+spec:
+  storageClassName: scn-pv-2
+  capacity:
+    storage: 150Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  local:
+    path: /tmp/kube
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k3d-k3s-default-agent-0
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: project
+  name: pg-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+  storageClassName: scn-pv-2

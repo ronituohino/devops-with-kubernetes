@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+  name: postgres-svc
+  namespace: project
+spec:
+  clusterIP: None
+  ports:
+    - name: web
+      port: 5432
+  selector:
+    app: postgresapp
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-stset
+  namespace: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresapp
+  serviceName: postgres-svc
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: postgresapp
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: TODO_API_PG_PASSWORD
+                  name: todo-api-pg-password
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: TODO_API_PG_USER
+                  name: configmap
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  key: TODO_API_PG_DB
+                  name: configmap
+            - name: POSTGRES_HOST_AUTH_METHOD
+              valueFrom:
+                configMapKeyRef:
+                  key: TODO_API_PG_HOST_AUTH_METHOD
+                  name: configmap
+          image: postgres:17.0-alpine3.20
+          name: postgres
+          ports:
+            - containerPort: 5432
+              name: web
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pg-pvc-vol
+              subPath: postgres
+      volumes:
+        - name: pg-pvc-vol
+          persistentVolumeClaim:
+            claimName: pg-pvc

@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: daily-pg-backup
+  namespace: project
+spec:
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            linkerd.io/inject: enabled
+        spec:
+          containers:
+            - env:
+                - name: GCLOUD_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      key: TOKEN
+                      name: gcloud-token
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: TODO_API_PG_PASSWORD
+                      name: todo-api-pg-password
+                - name: PGUSER
+                  valueFrom:
+                    configMapKeyRef:
+                      key: TODO_API_PG_USER
+                      name: configmap
+                - name: PGDATABASE
+                  valueFrom:
+                    configMapKeyRef:
+                      key: TODO_API_PG_DB
+                      name: configmap
+              image: PG_BACKUP/IMAGE
+              imagePullPolicy: IfNotPresent
+              name: daily-pg-backup
+          restartPolicy: Never
+          serviceAccountName: my-service-account
+  schedule: 0 18 * * *

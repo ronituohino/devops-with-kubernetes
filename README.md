@@ -67,6 +67,13 @@ admin
 <pass>
 ```
 
+[Linkerd](https://linkerd.io/2.16/getting-started/)
+
+```
+linkerd install --crds | kubectl apply -f -
+linkerd install | kubectl apply -f -
+```
+
 ### Ping Pong secrets
 
 ```

@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hourly-todo
+  namespace: project
+spec:
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            linkerd.io/inject: enabled
+        spec:
+          containers:
+            - image: GENERATE_TODO/IMAGE
+              imagePullPolicy: IfNotPresent
+              name: hourly-todo
+          restartPolicy: OnFailure
+  schedule: 1 * * * *
