@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   namespace: project
-  name: todo-app
+  name: todo-api
 spec:
   strategy:
     canary:
@@ -11,9 +11,3 @@ spec:
         - analysis:
             templates:
               - templateName: staging-cpu-usage
-  template:
-    spec:
-      volumes:
-        - name: picture-cache
-          persistentVolumeClaim:
-            claimName: staging-picture-cache-claim

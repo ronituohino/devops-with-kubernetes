@@ -2,24 +2,26 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: prod-project
 resources:
-  - namespaces/namespace.yaml
-  - volumes/pv1.yaml
-  - volumes/pv2.yaml
-  - ./../../base
-  - cron/daily-pg-backup.yaml
+- namespaces/namespace.yaml
+- volumes/pv1.yaml
+- volumes/pv2.yaml
+- manifests/analysistemplate.yaml
+- ./../../base
+- cron/daily-pg-backup.yaml
 
 patches:
-  - path: manifests/todo-api-pg.yaml
-  - path: manifests/todo-app.yaml
+- path: manifests/broadcaster.yaml
+- path: manifests/todo-api-pg.yaml
+- path: manifests/todo-app.yaml
 
 images:
-  - name: TODO_API/IMAGE
-    newName: ronituohino/todo-api:4.06.2
-  - name: TODO_APP/IMAGE
-    newName: ronituohino/todo-app:4.05.4
-  - name: GENERATE_TODO/IMAGE
-    newName: ronituohino/generate-todo:4.02.0
-  - name: PG_BACKUP/IMAGE
-    newName: ronituohino/pg-backup:3.07.1
-  - name: BROADCASTER/IMAGE
-    newName: ronituohino/broadcaster:4.06.4
+- name: TODO_API/IMAGE
+  newName: ronituohino/todo-api:4.06.2
+- name: TODO_APP/IMAGE
+  newName: ronituohino/todo-app:4.05.4
+- name: GENERATE_TODO/IMAGE
+  newName: ronituohino/generate-todo:4.02.0
+- name: PG_BACKUP/IMAGE
+  newName: ronituohino/pg-backup:3.07.1
+- name: BROADCASTER/IMAGE
+  newName: ronituohino/broadcaster:4.06.4

@@ -5,6 +5,7 @@ resources:
 - namespaces/namespace.yaml
 - volumes/pv1.yaml
 - volumes/pv2.yaml
+- manifests/analysistemplate.yaml
 - ./../../base
 
 patches:
