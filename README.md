@@ -101,6 +101,14 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
+  namespace: prod-project
+  name: gcloud-token
+data:
+  TOKEN: ...
+---
+apiVersion: v1
+kind: Secret
+metadata:
   namespace: staging-project
   name: todo-api-pg-password
 data:
