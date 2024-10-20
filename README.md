@@ -146,4 +146,3 @@ name: gcloud-token
 data:
  - TOKEN: ...
 ```
-
