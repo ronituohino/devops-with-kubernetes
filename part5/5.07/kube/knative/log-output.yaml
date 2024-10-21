@@ -1,0 +1,40 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  namespace: exercise
+  name: log-output-svc
+spec:
+  template:
+    spec:
+      containers:
+        - name: log-output
+          image: LOG_OUTPUT/IMAGE
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: MESSAGE
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/app/config
+              readOnly: true
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8080
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configmap
+            items:
+              - key: information.txt
+                path: information.txt

@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: LOG_OUTPUT/IMAGE
+    newName: ronituohino/log-output
+    newTag: 5.07.3
+  - name: PING_PONG/IMAGE
+    newName: ronituohino/ping-pong
+    newTag: 5.07.0
+resources:
+  - namespaces/namespace.yaml
+  - manifests/configmap.yaml
+  - manifests/ping-pong-postgres.yaml
+  - knative/ping-pong.yaml
+  - knative/log-output.yaml
+  - secrets/secret.yaml
