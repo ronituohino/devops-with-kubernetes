@@ -1,0 +1,9 @@
+kubectl get pod -l serving.knative.dev/service=hello -w
+NAME                                      READY   STATUS    RESTARTS   AGE
+hello-00001-deployment-67d669dd88-fdlw8   2/2     Running   0          63s
+hello-00001-deployment-67d669dd88-fdlw8   2/2     Terminating   0          66s
+hello-00001-deployment-67d669dd88-fdlw8   1/2     Terminating   0          90s
+hello-00001-deployment-67d669dd88-fdlw8   0/2     Terminating   0          96s
+hello-00001-deployment-67d669dd88-fdlw8   0/2     Terminating   0          96s
+hello-00001-deployment-67d669dd88-fdlw8   0/2     Terminating   0          96s
+hello-00001-deployment-67d669dd88-fdlw8   0/2     Terminating   0          96s
