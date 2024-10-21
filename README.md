@@ -5,6 +5,8 @@ This is a submission repository for the course
 
 [DBaaS vs DIY comparison](./part3/3.06/dbaas-vs-diy.md)
 
+[Rancher vs OpenShift comparison](./part5/5.05/comparison.md)
+
 ## Local
 
 To avoid having to push encoded secrets to the repository, I've manually set the secrets to the cluster once it has been set up.
