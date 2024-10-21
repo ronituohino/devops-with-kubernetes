@@ -74,6 +74,12 @@ linkerd install --crds | kubectl apply -f -
 linkerd install | kubectl apply -f -
 ```
 
+Flagger
+
+```
+kubectl apply -k github.com/fluxcd/flagger/kustomize/linkerd
+```
+
 ### Ping Pong secrets
 
 ```

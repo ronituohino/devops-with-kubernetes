@@ -18,6 +18,7 @@ jobs:
   build-publish:
     name: Project Build and Release
     runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
     env:
       ENVI: staging
     defaults:
